@@ -6,26 +6,14 @@
 		<td id="navigation">
 			<ul class="subjects">
 		<?php
-		
-      $subject_sql = "SELECT * FROM subjects";
-      $subject_result = $conn->query($subject_sql);
-
-		if (!$subject_result) {
-			die("Database query failed: " . mysql_error());
-		}
-
+	  $subject_result=get_all_subjects();
 		if ($subject_result->num_rows > 0) {
 			// output data of each row
 			while($subject = $subject_result->fetch_assoc()) {
 			  echo "<li>{$subject["menu_name"]}</li>"  ;
 			  echo "<ul class=\"pages\">";
-			  $sql = "SELECT * FROM pages WHERE subject_id={$subject["id"]}";
-             $result = $conn->query($sql);
-
-		if (!$result) {
-			die("Database query failed: " . mysql_error());
-		}
-
+			  
+			$result=get_pages_for_subject($subject["id"]);
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
