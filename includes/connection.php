@@ -1,13 +1,8 @@
 <?php
 require("constants.php");
+$conn=mysqli_connect("localhost","root","","widget_corp");
+if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+  }
 
-$connection = mysql_connect("localhost","root","ravi1250");
-if (!$connection) {
-	die("Database connection failed: " . mysql_error());
-}
-
-$db_select = mysql_select_db(DB_NAME,$connection);
-if (!$db_select) {
-	die("Database selection failed: " . mysql_error());
-}
 ?>
