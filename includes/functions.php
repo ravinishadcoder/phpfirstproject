@@ -60,4 +60,5 @@ function get_page_by_id($page_id){
 	  confirm_query($subject_result) ;
       return $tourresult;
 }
+
 ?>

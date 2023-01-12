@@ -3,11 +3,11 @@
 <?php
 $error=array();
 //form validation
-$required_field=array("menu_name","position","visible");
-foreach($required_field as $fieldname){
-    if(!isset($_POST["fieldname"])||empty($_POST["fieldname"])){
-        $error[]=$fieldname;
-    }
+if(!isset($_POST["menu_name"])||empty($_POST["menu_name"])){
+$error[]="menu_name";
+}
+if(!isset($_POST["position"])||empty($_POST["position"])){
+$error[]="position";
 }
 if(!empty($error)){
     redirect_to("new_subject.php");

@@ -53,6 +53,7 @@ if(!empty($error)){
 }
 }
 ?>
+
 <?php include("includes/header.php"); ?>
 <table id="structure">
 	<tr>
