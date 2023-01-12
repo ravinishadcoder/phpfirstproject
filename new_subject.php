@@ -47,25 +47,36 @@ if(isset($_GET["subj"])){
 		?>
 		</ul>
 		<br/>
-		<a href="new_subject.php">+Add a new subject</a>
+		
 		</td>
 		<td id="page">
-		<?php if (!is_null($sel_subject)) { // subject selected ?>
-			<h2><?php echo $sel_subject['menu_name']; ?></h2>
-		<?php } elseif (!is_null($sel_page)) { // page selected ?>
-			<h2><?php echo $sel_page['menu_name']; ?>
-			<div class="page-content">
-				<?php
-				echo $sel_page["content"];
-				?>
-			</div>
-		    </h2>
-			<div class="page-content">
-				<?php echo $sel_page['content']; ?>
-			</div>
-		<?php } else { // nothing selected ?>
-			<h2>Select a subject or page to edit</h2>
-		<?php } ?>
+        <h2>Add Subject</h2>
+			<form action="create_subject.php" method="post">
+				<p>Subject name: 
+					<input type="text" name="menu_name" value="" id="menu_name" />
+				</p>
+				<p>Position: 
+					<select name="position">
+                        <?php
+                        $subject_set=get_all_subjects();
+                        $subject_counts=mysqli_num_rows($subject_set);
+                        for($count=1;$count<=$subject_counts+1;$count++){
+                            echo "<option value=\"{$count}\">{$count}</option>";
+                        }
+                        ?>
+                    
+					</select>
+				</p>
+                
+				<p>Visible: 
+					<input type="radio" name="visible" value="0" /> No
+					&nbsp;
+					<input type="radio" name="visible" value="1" /> Yes
+				</p>
+				<input type="submit" value="Add Subject" />
+			</form>
+			<br />
+			<a href="content.php">Cancel</a>
 		</td>
 	</tr>
 </table>
