@@ -26,4 +26,32 @@ $result = $conn->query($sql);
 confirm_query($result) ;
 return $result;
 }
+function get_subject_by_id($subject_id){
+    global $conn;
+    $query= "SELECT * 
+	        FROM subjects 
+            WHERE id={$subject_id}
+            LIMIT 1";	
+      $subject_sql = $query;   
+      $subject_result = $conn->query($subject_sql);
+    //   $result = $con->query($tourquery);  // or mysqli_query($con, $tourquery);
+      $tourresult = $subject_result->fetch_array();
+      
+	  confirm_query($subject_result) ;
+      return $tourresult;
+}
+function get_page_by_id($page_id){
+    global $conn;
+    $query= "SELECT * 
+	        FROM pages 
+            WHERE id={$page_id}
+            LIMIT 1";	
+      $subject_sql = $query;   
+      $subject_result = $conn->query($subject_sql);
+    //   $result = $con->query($tourquery);  // or mysqli_query($con, $tourquery);
+      $tourresult = $subject_result->fetch_array();
+      
+	  confirm_query($subject_result) ;
+      return $tourresult;
+}
 ?>

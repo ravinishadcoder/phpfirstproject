@@ -3,14 +3,21 @@
 <?php
 if(isset($_GET["subj"])){
 	$sel_subj=$_GET["subj"];
-    $sel_page="";
+	$sel_subject=get_subject_by_id($sel_subj);
+    $sel_page=NULL;
+	$sel_pg=0;
 }elseif(isset($_GET["page"])){
-	$sel_page=$_GET["page"];
-	$sel_subj="";
+	$sel_pg=$_GET["page"];
+	$sel_subj=0;
+	$sel_subject=NULL;
+	$sel_page= get_page_by_id($sel_pg);
 }else{
-	$sel_page="";
-	$sel_subj="";
+	$sel_subj=0;
+	$sel_subject=NULL;
+	$sel_pg=0;
+	$sel_page=NULL;
 }
+ 
 ?>
 <?php include("includes/header.php"); ?>
 <table id="structure">
@@ -31,7 +38,7 @@ if(isset($_GET["subj"])){
 			while($row = $result->fetch_assoc()) {
 			  echo "<li>
 			  <a href=\"content.php?page=".urlencode($row["id"])."\">
-			  {$row["menu_name"]} </a></li>"  ;
+			  {$row["menu_name"]}</a></li>"  ;
 			}
 			echo"</ul>";
 		  }
@@ -41,13 +48,22 @@ if(isset($_GET["subj"])){
 		</ul>
 		</td>
 		<td id="page">
-			<h2>Content Area</h2>
-			<?php
-			echo $sel_subj;
-			?><br>
-			<?php
-			echo $sel_page;
-			?><br>
+		<?php if (!is_null($sel_subject)) { // subject selected ?>
+			<h2><?php echo $sel_subject['menu_name']; ?></h2>
+		<?php } elseif (!is_null($sel_page)) { // page selected ?>
+			<h2><?php echo $sel_page['menu_name']; ?>
+			<div class="page-content">
+				<?php
+				echo $sel_page["content"];
+				?>
+			</div>
+		    </h2>
+			<div class="page-content">
+				<?php echo $sel_page['content']; ?>
+			</div>
+		<?php } else { // nothing selected ?>
+			<h2>Select a subject or page to edit</h2>
+		<?php } ?>
 		</td>
 	</tr>
 </table>
