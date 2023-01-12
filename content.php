@@ -29,7 +29,7 @@ if(isset($_GET["subj"])){
 		if ($subject_result->num_rows > 0) {
 			// output data of each row
 			while($subject = $subject_result->fetch_assoc()) {
-			  echo "<li><a href=\"content.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>"  ;
+			  echo "<li><a href=\"edit_subject.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>"  ;
 			  echo "<ul class=\"pages\">";
 			  
 			$result=get_pages_for_subject($subject["id"]);
